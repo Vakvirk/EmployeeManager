@@ -31,9 +31,10 @@ public class EmployeeService {
         this.updateEmployeeMapper = updateEmployeeMapper;
     }
 
-    public Employee createEmployee(CreateEmployeeDTO dto) {
+    public EmployeeDTO createEmployee(CreateEmployeeDTO dto) {
         Employee employee = createEmployeeMapper.apply(dto);
-        return employeeRepository.save(employee);
+        employeeRepository.save(employee);
+        return employeeDTOMapper.apply(employee);
     }
 
     public EmployeeDTO getEmployeeByID(Long id) {
@@ -48,12 +49,13 @@ public class EmployeeService {
         return dtos;
     }
 
-    public Employee updateEmployee(UpdateEmployeeDTO dto) {
-        Employee employee = employeeRepository.findById(dto.id())
-                .orElseThrow(() -> new EntityNotFoundException("Nie znaleziono pracownika z id " + dto.id()));
+    public EmployeeDTO updateEmployee(Long id, UpdateEmployeeDTO dto) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Nie znaleziono pracownika z id " + id));
         updateEmployeeMapper.updateEmployeeFromDTO(dto, employee);
         employeeRepository.save(employee);
-        return employee;
+        EmployeeDTO updatedDto = employeeDTOMapper.apply(employee);
+        return updatedDto;
     }
 
     public void deleteEmployee(Long id) {
