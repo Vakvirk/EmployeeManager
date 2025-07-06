@@ -31,4 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
 requests.http
+=======
+
+
+requests.http
+>>>>>>> a02401a9915ad2769ce2233be690e0f28d1056b1
