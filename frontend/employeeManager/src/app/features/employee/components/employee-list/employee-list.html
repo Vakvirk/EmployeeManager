@@ -1,0 +1,10 @@
+<h2>Lista pracowników</h2>
+
+<ul>
+  <li *ngFor="let employee of employees">
+    {{ employee.name }} - {{ employee.jobTitle }}
+  </li>
+</ul>
+
+<h2>Ciekawe czy działa</h2>
+<p>{{ employee.name }} - {{ employee.jobTitle }}</p>
